@@ -91,3 +91,5 @@ Configure dashboard:
 curl -XDELETE http://admin:admin@localhost:4000/api/dashboards/db/requests
 curl -XPOST -H 'Content-Type: application/json' http://admin:admin@localhost:4000/api/dashboards/db -d@stats/dashboard.json
 ```
+
+Then visit [localhost:4000/dashboard/db/requests](http://localhost:4000/dashboard/db/requests) and watch the requests!
