@@ -1,0 +1,18 @@
+{
+  "orgId": 1,
+  "name": "influxdb",
+  "type": "influxdb",
+  "typeLogoUrl": "",
+  "access": "proxy",
+  "url": "http://influxdb:8086",
+  "password": "",
+  "user": "",
+  "database": "fstool",
+  "basicAuth": false,
+  "basicAuthUser": "",
+  "basicAuthPassword": "",
+  "withCredentials": false,
+  "isDefault": true,
+  "jsonData": {},
+  "secureJsonFields": {}
+}
