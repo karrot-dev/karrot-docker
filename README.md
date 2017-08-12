@@ -12,6 +12,8 @@ git clone https://github.com/yunity/foodsaving-backend.git
 docker-compose up -d
 ```
 
+Then, you _must_ create the [influxdb database](https://github.com/yunity/foodsaving-docker#influxdb) before you can begin. Hopefully we can automate this in the future.
+
 It's up to you to manage your frontend and backend repos, we won't update them. You can switch branches as you desire. You might need to restart frontend or backend after doing so.
 
 We make use of docker volumes to store data, so most useful things should stay around even if you remove the containers with `docker-compose down`.
