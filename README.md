@@ -43,6 +43,13 @@ Restart backend:
 docker-compose restart backend
 ```
 
+Drop db:
+```
+docker-compose stop backend pgadmin4
+docker-compose run backend ./manage.py reset_db --noinput
+docker-compose up -d
+```
+
 ## Services
 
 Once everything is up and running you can access:
