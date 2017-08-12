@@ -18,6 +18,18 @@ It's up to you to manage your frontend and backend repos, we won't update them. 
 
 We make use of docker volumes to store data, so most useful things should stay around even if you remove the containers with `docker-compose down`.
 
+## Services
+
+Once everything is up and running you can access:
+
+| Name | URL | Description |
+|---|---|---|
+| main site | [localhost:3000](http://localhost:3000) | |
+| swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | |
+| maildev | [localhost:1080](http://localhost:1080) | catchs emails sent by app |
+| pgadmin4 | [localhost:5050](http://localhost:5050) pgadmin4@pgadmin.org:admin then use "db" for host/user/pass | see/view/manage postgres database |
+| grafana | [localhost:4000](http://localhost:4000) admin:admin | view stats in influxdb, see "stats" section below |
+
 ## Useful commands
 
 Watch logs for all containers:
@@ -51,18 +63,6 @@ docker-compose stop backend pgadmin4
 docker-compose run backend ./manage.py reset_db --noinput
 docker-compose up -d
 ```
-
-## Services
-
-Once everything is up and running you can access:
-
-| Name | URL | Description |
-|---|---|---|
-| main site | [localhost:3000](http://localhost:3000) | |
-| swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | |
-| maildev | [localhost:1080](http://localhost:1080) | catchs emails sent by app |
-| pgadmin4 | [localhost:5050](http://localhost:5050) pgadmin4@pgadmin.org:admin then use "db" for host/user/pass | see/view/manage postgres database |
-| grafana | [localhost:4000](http://localhost:4000) admin:admin | view stats in influxdb, see "stats" section below |
 
 ## stats
 
