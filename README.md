@@ -61,8 +61,8 @@ Once everything is up and running you can access:
 | main site | [localhost:3000](http://localhost:3000) | |
 | swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | |
 | maildev | [localhost:1080](http://localhost:1080) | catchs emails sent by app |
-| pgadmin4 | [localhost:5050](http://localhost:5050) | see/view/manage postgres database |
-| grafana | [localhost:4000](http://localhost:4000) | view stats in influxdb, see "stats" section below |
+| pgadmin4 | [localhost:5050](http://localhost:5050) pgadmin4@pgadmin.org:admin | see/view/manage postgres database |
+| grafana | [localhost:4000](http://localhost:4000) admin:admin | view stats in influxdb, see "stats" section below |
 
 ## stats
 
