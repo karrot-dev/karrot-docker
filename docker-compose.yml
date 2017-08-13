@@ -1,6 +1,29 @@
 version: '2'
 services:
 
+  wait:
+    # just use same image as another container, no extra download
+    image: node:8.1.2
+    command: >
+      sh -c "
+
+      echo 'Waiting for database...' &&
+      wait-for-it -q -t 0 db:5432 &&
+      echo '... database ready' &&
+
+      echo 'Waiting for backend...' &&
+      wait-for-it -q -t 0 backend:8000 &&
+      echo '... backend ready' &&
+
+      echo 'Waiting for frontend...' &&
+      wait-for-it -q -t 0 frontend:3000 &&
+      echo '... frontend ready' &&
+
+      echo 'All ready! Go and visit http://localhost:3000 :)'
+      "
+    volumes:
+    - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
+
   frontend:
     image: node:8.1.2
     command: >
@@ -10,12 +33,15 @@ services:
       "
     environment:
       BACKEND: http://backend:8000
+    expose:
+      - 3000
     ports:
       - 3000:3000
     volumes:
       - ./foodsaving-frontend:/app
       - ./docker/frontend/.env:/app/.env
       - node_modules:/app/node_modules
+      - yarn-cache:/usr/local/share/.cache/yarn
     working_dir: /app
 
   backend:
@@ -103,6 +129,7 @@ services:
 volumes:
   virtualenv:
   pip-cache:
+  yarn-cache:
   node_modules:
   database:
   pgadmin:
