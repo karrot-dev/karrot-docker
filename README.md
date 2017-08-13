@@ -12,6 +12,17 @@ git clone https://github.com/yunity/foodsaving-backend.git
 docker-compose up -d
 ```
 
+You can wait for everything to become ready by watching the `wait` container logs:
+```
+docker-compose logs -f wait
+```
+
+You probably want to have some data to play with then:
+
+```
+docker-compose exec backend ./manage.py create_sample_data
+```
+
 It's up to you to manage your frontend and backend repos, we won't update them. You can switch branches as you desire. You might need to restart frontend or backend after doing so.
 
 We make use of docker volumes to store data, so most useful things should stay around even if you remove the containers with `docker-compose down`.
@@ -23,10 +34,10 @@ Once everything is up and running you can access:
 | Name | URL | Description |
 |---|---|---|
 | main site | [localhost:3000](http://localhost:3000) | |
-| swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | |
+| swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | view and use the REST API |
 | maildev | [localhost:1080](http://localhost:1080) | catchs emails sent by app |
-| pgadmin4 | [localhost:5050](http://localhost:5050) pgadmin4@pgadmin.org:admin then use "db" for host/user/pass | see/view/manage postgres database |
-| grafana | [localhost:4000](http://localhost:4000) admin:admin | view stats in influxdb, see "stats" section below |
+| pgadmin | [localhost:5050](http://localhost:5050) pgadmin4@pgadmin.org:admin then use "db" for host/user/pass | see/view/manage postgres database |
+| grafana | [localhost:4000](http://localhost:4000) admin:admin | see [stats](#stats) section for setup info |
 
 ## Useful commands
 
@@ -62,7 +73,7 @@ docker-compose run backend ./manage.py reset_db --noinput
 docker-compose up -d
 ```
 
-## stats
+## Stats
 
 Foodsaving Tool reports stats to influxdb using
 [django-influxdb-metrics](https://github.com/bitlabstudio/django-influxdb-metrics).
