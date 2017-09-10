@@ -38,7 +38,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./foodsaving-frontend:/app
+      - ./karrot-frontend:/app
       - ./docker/frontend/.env:/app/.env
       - node_modules:/app/node_modules
       - yarn-cache:/usr/local/share/.cache/yarn
@@ -65,7 +65,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./foodsaving-backend:/app
+      - ./karrot-backend:/app
       - ./docker/backend/local_settings.py:/app/config/local_settings.py
       - virtualenv:/app/env
       - pip-cache:/root/.cache/pip/
