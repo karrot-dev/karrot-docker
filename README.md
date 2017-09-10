@@ -1,14 +1,14 @@
-# Foodsaving Tool docker setup
+# _karrot_ docker setup
 
 This lets you run everything you need in a docker-compose setup.
 
 ## Getting started
 
 ```
-git clone https://github.com/yunity/foodsaving-docker.git
-cd foodsaving-docker
-git clone https://github.com/yunity/foodsaving-frontend.git
-git clone https://github.com/yunity/foodsaving-backend.git
+git clone https://github.com/yunity/karrot-docker.git
+cd karrot-docker
+git clone https://github.com/yunity/karrot-frontend.git
+git clone https://github.com/yunity/karrot-backend.git
 docker-compose up -d
 ```
 
@@ -75,7 +75,7 @@ docker-compose up -d
 
 ## Stats
 
-Foodsaving Tool reports stats to influxdb using
+_karrot_ reports stats to influxdb using
 [django-influxdb-metrics](https://github.com/bitlabstudio/django-influxdb-metrics).
 
 We can use grafana to visualize them.
