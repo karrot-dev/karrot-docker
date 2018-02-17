@@ -33,7 +33,7 @@ Once everything is up and running you can access:
 
 | Name | URL | Description |
 |---|---|---|
-| main site | [localhost:3000](http://localhost:3000) | |
+| main site | [localhost:8080](http://localhost:8080) | |
 | swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | view and use the REST API |
 | maildev | [localhost:1080](http://localhost:1080) | catchs emails sent by app |
 | pgadmin | [localhost:5050](http://localhost:5050) pgadmin4@pgadmin.org:admin then use "db" for host/user/pass | see/view/manage postgres database |
