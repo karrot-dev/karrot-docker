@@ -37,7 +37,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # }
 
 DEFAULT_FROM_EMAIL = "fstool@yunity.org"  # can be anything if using the console backend
-HOSTNAME = 'https://localhost:8080'  # for constructing the frontend URL
+HOSTNAME = 'http://localhost:8080'  # for constructing the frontend URL
 SITE_NAME = 'karrot.world' # used as human readable site name, for example in e-mail templates
 
  
