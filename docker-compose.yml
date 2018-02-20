@@ -16,10 +16,10 @@ services:
       echo '... backend ready' &&
 
       echo 'Waiting for frontend...' &&
-      wait-for-it -q -t 0 frontend:3000 &&
+      wait-for-it -q -t 0 frontend:8080 &&
       echo '... frontend ready' &&
 
-      echo 'All ready! Go and visit http://localhost:3000 :)'
+      echo 'All ready! Go and visit http://localhost:8080 :)'
       "
     volumes:
     - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
