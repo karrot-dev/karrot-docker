@@ -47,7 +47,7 @@ SITE_NAME = 'karrot.world' # used as human readable site name, for example in e-
 ######
 
 INFLUXDB_DISABLED = False
-INFLUXDB_HOST = '127.0.0.1'
+INFLUXDB_HOST = 'influxdb'
 INFLUXDB_PORT = '8086'
 INFLUXDB_USER = ''
 INFLUXDB_PASSWORD = ''
