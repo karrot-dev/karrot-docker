@@ -85,6 +85,16 @@ services:
       POSTGRES_USER: db
       POSTGRES_DB: db
 
+  mjml:
+    image: node:8.1.2
+    working_dir: /app/mjml
+    command: sh -c 'yarn && ./convert --watch'
+    ports:
+      - 8001:8001
+    volumes:
+      - ./karrot-backend:/app
+      - mjml-node_modules:/app/mjml/node_modules
+
   redis:
     image: redis:3.0.7-alpine
 
@@ -131,6 +141,7 @@ volumes:
   pip-cache:
   yarn-cache:
   node_modules:
+  mjml-node_modules:
   database:
   pgadmin:
   influxdb:

@@ -30,7 +30,10 @@ MEDIA_URL = '/media/'
 # Set the sparkpost key on deploy
 ######
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'maildev'
+
 
 # ANYMAIL = {
 #     "SPARKPOST_API_KEY": "your sparkpost key"
