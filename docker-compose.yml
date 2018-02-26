@@ -74,6 +74,26 @@ services:
       PATH: /app/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     working_dir: /app
 
+  backend_queue:
+    image: python:3.5.3
+    command: >
+      sh -c "
+      wait-for-it -q -t 0 backend:8000 &&
+      env/bin/python manage.py run_huey
+      "
+    depends_on:
+      - "backend"
+    volumes:
+      - ./karrot-backend:/app
+      - ./docker/backend/local_settings.py:/app/config/local_settings.py
+      - virtualenv:/app/env
+      - pip-cache:/root/.cache/pip/
+      - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
+    environment:
+      REDIS_HOST: redis
+      PATH: /app/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    working_dir: /app
+
   db:
     image: postgres:9.6.3
     ports:
