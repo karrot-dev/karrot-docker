@@ -74,6 +74,25 @@ services:
       PATH: /app/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     working_dir: /app
 
+  huey:
+    image: python:3.5.3
+    restart: always
+    command: >
+      sh -c "
+      (command -v entr || apt-get update && apt-get install -y entr) &&
+      find foodsaving -name '*.py' | entr -r env/bin/python manage.py run_huey
+      "
+    volumes:
+      - ./karrot-backend:/app
+      - ./docker/backend/local_settings.py:/app/config/local_settings.py
+      - virtualenv:/app/env
+      - pip-cache:/root/.cache/pip/
+    environment:
+      REDIS_HOST: redis
+    working_dir: /app
+    depends_on:
+      - backend
+
   db:
     image: postgres:9.6.3
     ports:
