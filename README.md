@@ -68,7 +68,7 @@ docker-compose restart backend
 
 Drop db:
 ```
-docker-compose stop backend pgadmin4
+docker-compose stop backend pgadmin
 docker-compose run backend ./manage.py reset_db --noinput
 docker-compose up -d
 ```
