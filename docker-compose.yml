@@ -58,6 +58,7 @@ services:
       (test -d env/bin || virtualenv --no-site-packages env) &&
       (test -f env/bin/pip-sync || env/bin/pip install pip-tools) &&
       (command -v entr || apt-get update && apt-get install -y entr) &&
+      echo 'source env/bin/activate' >  ~/.bashrc &&
       env/bin/pip-sync &&
       env/bin/python manage.py migrate &&
       env/bin/python manage.py runserver 0.0.0.0:8000
