@@ -60,7 +60,7 @@ services:
       (command -v entr || apt-get update && apt-get install -y entr) &&
       echo 'source env/bin/activate' >  ~/.bashrc &&
       source env/bin/activate &&
-      ./sync.py
+      ./sync.py &&
       ./manage.py migrate &&
       ./manage.py runserver 0.0.0.0:8000
       "
