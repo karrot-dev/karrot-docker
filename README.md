@@ -66,11 +66,9 @@ Restart backend:
 docker-compose restart backend
 ```
 
-Drop db:
+Drop and recreate db:
 ```
-docker-compose stop backend pgadmin
-docker-compose run backend ./manage.py reset_db --noinput
-docker-compose up -d
+./scripts/resetdb
 ```
 
 ## Stats
