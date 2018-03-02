@@ -53,15 +53,16 @@ services:
     # What is entr?
     #   For rerunning tests on code change, see README.md
     command: >
-      sh -c "
+      bash -c "
       (command -v virtualenv || /usr/local/bin/pip install virtualenv) &&
       (test -d env/bin || virtualenv --no-site-packages env) &&
       (test -f env/bin/pip-sync || env/bin/pip install pip-tools) &&
       (command -v entr || apt-get update && apt-get install -y entr) &&
       echo 'source env/bin/activate' >  ~/.bashrc &&
-      env/bin/pip-sync &&
-      env/bin/python manage.py migrate &&
-      env/bin/python manage.py runserver 0.0.0.0:8000
+      source env/bin/activate &&
+      ./sync.py
+      ./manage.py migrate &&
+      ./manage.py runserver 0.0.0.0:8000
       "
     ports:
       - 8000:8000
