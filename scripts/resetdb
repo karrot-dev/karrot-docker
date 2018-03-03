@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -eu
+
+docker-compose exec db sh -c "
+  (
+    psql -U db db -c \"
+      SELECT pg_terminate_backend(pid)
+      FROM pg_stat_activity
+      WHERE
+        datname = 'db' AND
+        pid <> pg_backend_pid()
+    \" >/dev/null 2>&1 || true) &&
+  (
+    dropdb -U db db &&
+    createdb -U db db &&
+    echo 'Database was reset'
+  )"

@@ -1,6 +1,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
 
 DATABASES = {
     'default': {
@@ -82,3 +83,24 @@ FCM_SERVER_KEY = 'your server key'
 #    # release based on the git info.
 #    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
 #}
+
+import sys
+
+TESTING = sys.argv[1:2] == ['test']
+
+if TESTING:
+  HUEY = {
+     'always_eager': True,
+  }
+else:
+  HUEY = {
+     'always_eager': False,
+     'connection': {
+         'host': REDIS_HOST,
+     },
+     'consumer': {
+         'workers': 8,
+         'worker_type' : 'greenlet',
+     },
+  }
+
