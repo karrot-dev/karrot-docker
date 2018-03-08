@@ -69,6 +69,7 @@ INFLUXDB_USE_THREADING = True
 
 FCM_SERVER_KEY = 'your server key'
 
+
 #######
 # Sentry.io config for error reporting
 # Only needs to be enabled on deploy
@@ -84,6 +85,21 @@ FCM_SERVER_KEY = 'your server key'
 #    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
 #}
 
+HUEY = {
+   'always_eager': False,
+   'connection': {
+       'host': REDIS_HOST,
+   },
+   'consumer': {
+       'workers': 8,
+       'worker_type' : 'greenlet',
+   },
+}
+
+#######
+# Test override settings
+########
+
 import sys
 
 TESTING = sys.argv[1:2] == ['test']
@@ -92,15 +108,4 @@ if TESTING:
   HUEY = {
      'always_eager': True,
   }
-else:
-  HUEY = {
-     'always_eager': False,
-     'connection': {
-         'host': REDIS_HOST,
-     },
-     'consumer': {
-         'workers': 8,
-         'worker_type' : 'greenlet',
-     },
-  }
-
+  INFLUXDB_DISABLED = True
