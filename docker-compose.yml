@@ -72,6 +72,7 @@ services:
       - virtualenv:/app/env
       - pip-cache:/root/.cache/pip/
     environment:
+      PYTHONUNBUFFERED: 1
       REDIS_HOST: redis
       PATH: /app/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     working_dir: /app
