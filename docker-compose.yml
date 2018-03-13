@@ -151,13 +151,15 @@ services:
     ports:
       - 1080:80
 
-  pgadmin:
-    image: fenglc/pgadmin4
+  pgweb:
+    image: sosedoff/pgweb
     ports:
-      - 5050:5050
-    volumes:
-      - pgadmin:/var/lib/pgadmin4/data
+      - 5050:8081
+    environment:
+      DATABASE_URL: postgres://db:db@db:5432/db?sslmode=disable
     links:
+      - db
+    depends_on:
       - db
 
 volumes:
@@ -167,6 +169,5 @@ volumes:
   node_modules:
   mjml-node_modules:
   database:
-  pgadmin:
   influxdb:
   grafana:
