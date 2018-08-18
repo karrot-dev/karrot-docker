@@ -25,13 +25,14 @@ services:
     - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
 
   frontend:
-    image: node:8.11.1
+    image: node:10
     command: >
       sh -c "
       yarn &&
       yarn dev
       "
     environment:
+      HOST: 0.0.0.0
       BACKEND: http://backend:8000
     expose:
       - 8080
