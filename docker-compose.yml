@@ -3,7 +3,7 @@ services:
 
   wait:
     # just use same image as another container, no extra download
-    image: node:8.11.1
+    image: node:10
     command: >
       sh -c "
 
@@ -26,6 +26,7 @@ services:
 
   frontend:
     image: node:10
+    restart: unless-stopped
     command: >
       sh -c "
       yarn &&
@@ -47,6 +48,7 @@ services:
 
   backend:
     image: python:3.5.3
+    restart: unless-stopped
     # Why /usr/local/bin/pip install virtualenv?
     #   env/bin is at front of path so pip-sync would uninstall it
     # Why use virtualenv inside docker?
@@ -80,7 +82,7 @@ services:
 
   huey:
     image: python:3.5.3
-    restart: always
+    restart: unless-stopped
     command: >
       sh -c "
       (command -v entr || apt-get update && apt-get install -y entr) &&
@@ -101,6 +103,7 @@ services:
 
   db:
     image: postgres:9.6.3
+    restart: unless-stopped
     ports:
       - 15432:5432
     volumes:
@@ -111,7 +114,8 @@ services:
       POSTGRES_DB: db
 
   mjml:
-    image: node:8.11.1
+    image: node:10
+    restart: unless-stopped
     working_dir: /app/mjml
     command: sh -c 'yarn && ./convert --watch'
     ports:
@@ -122,26 +126,24 @@ services:
 
   redis:
     image: redis:3.0.7-alpine
+    restart: unless-stopped
 
   influxdb:
-    image: influxdb:1.3.3-alpine
-    # a bit hacky way to create the database
-    command: >
-      sh -c "
-      (sleep 3 && influx -execute 'CREATE DATABASE fstool') &
-      influxd -config /etc/influxdb/influxdb.toml
-      "
+    image: influxdb:1.5.4-alpine
+    restart: unless-stopped
     ports:
       - 8083:8083
       - 8086:8086
     environment:
       INFLUXDB_ADMIN_ENABLED: "true"
+      INFLUXDB_DB: "fstool"
     volumes:
       - influxdb:/var/lib/influxdb
       - ./docker/influxdb/influxdb.toml:/etc/influxdb/influxdb.toml
 
   grafana:
     image: grafana/grafana:4.6.3
+    restart: unless-stopped
     ports:
       - 4000:3000
     volumes:
@@ -149,11 +151,13 @@ services:
 
   maildev:
     image: djfarrelly/maildev:1.0.0-rc2
+    restart: unless-stopped
     ports:
       - 1080:80
 
   pgweb:
     image: sosedoff/pgweb
+    restart: unless-stopped
     ports:
       - 5050:8081
     environment:
