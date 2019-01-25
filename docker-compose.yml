@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
 
   wait:
@@ -35,6 +35,9 @@ services:
     environment:
       HOST: 0.0.0.0
       BACKEND: http://backend:8000
+      NAME: frontend
+      TERM: ${TERM:-}
+      SHELL: /bin/bash
     expose:
       - 8080
     ports:
@@ -42,6 +45,7 @@ services:
     volumes:
       - ./karrot-frontend:/app
       - ./docker/frontend/.env:/app/.env
+      - ./docker/common/.bashrc:/root/.bashrc
       - node_modules:/app/node_modules
       - yarn-cache:/usr/local/share/.cache/yarn
     working_dir: /app
@@ -61,7 +65,6 @@ services:
       (test -d env/bin || virtualenv --no-site-packages env) &&
       (test -f env/bin/pip-sync || env/bin/pip install pip-tools) &&
       (command -v entr || apt-get update && apt-get install -y entr) &&
-      echo 'source env/bin/activate' >  ~/.bashrc &&
       source env/bin/activate &&
       ./sync.py &&
       ./manage.py migrate &&
@@ -72,12 +75,16 @@ services:
     volumes:
       - ./karrot-backend:/app
       - ./docker/backend/local_settings.py:/app/config/local_settings.py
+      - ./docker/common/.bashrc:/root/.bashrc
       - virtualenv:/app/env
       - pip-cache:/root/.cache/pip/
     environment:
       PYTHONUNBUFFERED: 1
       REDIS_HOST: redis
       PATH: /app/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      NAME: backend
+      TERM: ${TERM:-}
+      SHELL: /bin/bash
     working_dir: /app
 
   huey:

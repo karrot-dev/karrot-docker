@@ -12,20 +12,44 @@ git clone https://github.com/yunity/karrot-backend.git
 docker-compose up -d
 ```
 
+(_note: you might want to switch to the git+ssh protocol urls later if you have an SSH key setup at GitHub_)
+
 You can wait for everything to become ready by watching the `wait` container logs:
+
 ```
 docker-compose logs -f wait
 ```
 
-You probably want to have some data to play with then:
-
-```
-docker-compose exec backend ./manage.py create_sample_data
-```
+If you want to run more commands it's best to start a shell for either the frontend/backend or both.
 
 It's up to you to manage your frontend and backend repos, we won't update them. You can switch branches as you desire. You might need to restart frontend or backend after doing so.
 
 We make use of docker volumes to store data, so most useful things should stay around even if you remove the containers with `docker-compose down`.
+
+### Frontend
+
+Enter a shell by running:
+
+```
+docker-compose run --no-deps frontend bash
+```
+
+Now you can run commands such as:
+* `yarn lint` lint your files
+* `yarn add <foo>` add the `foo` dependency
+
+### Backend
+
+Enter a shell by running:
+
+```
+docker-compose run --no-deps backend bash
+```
+
+Now you can run django commands such as:
+* `./manage.py create_sample_data` to create sample data in your database
+* `./manage.py test` to run the tests
+* `./manage.py test --parallel 4 --failfast --keepdb` run tests with some cool options
 
 ## Services
 
@@ -54,11 +78,6 @@ docker-compose logs -f frontend
 Seed the database:
 ```
 docker-compose exec backend ./manage.py create_sample_data
-```
-
-Watch for changes, and run tests in parallel:
-```
-docker-compose exec backend sh -c "find foodsaving -name '*.py' | entr ./manage.py test --parallel 4 --failfast --keepdb"
 ```
 
 Restart backend:
