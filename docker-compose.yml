@@ -51,20 +51,11 @@ services:
     working_dir: /app
 
   backend:
-    image: python:3.5.3
+    image: karrot/python:1.9
     restart: unless-stopped
-    # Why /usr/local/bin/pip install virtualenv?
-    #   env/bin is at front of path so pip-sync would uninstall it
-    # Why use virtualenv inside docker?
-    #   See https://hynek.me/articles/virtualenv-lives/
-    # What is entr?
-    #   For rerunning tests on code change, see README.md
     command: >
       bash -c "
-      (command -v virtualenv || /usr/local/bin/pip install virtualenv) &&
-      (test -d env/bin || virtualenv --no-site-packages env) &&
-      (test -f env/bin/pip-sync || env/bin/pip install pip-tools) &&
-      (command -v entr || apt-get update && apt-get install -y entr) &&
+      (test -d env/bin || virtualenv --python=python3 --no-site-packages env) &&
       source env/bin/activate &&
       ./sync.py &&
       ./manage.py migrate &&
@@ -85,14 +76,15 @@ services:
       NAME: backend
       TERM: ${TERM:-}
       SHELL: /bin/bash
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
     working_dir: /app
 
   huey:
-    image: python:3.5.3
+    image: karrot/python:1.9
     restart: unless-stopped
     command: >
       sh -c "
-      (command -v entr || apt-get update && apt-get install -y entr) &&
       wait-for-it -q -t 0 backend:8000 &&
       find foodsaving -name '*.py' | entr -r env/bin/python manage.py run_huey
       "
@@ -104,6 +96,8 @@ services:
       - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
     environment:
       REDIS_HOST: redis
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
     working_dir: /app
     depends_on:
       - backend
