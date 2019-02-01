@@ -56,6 +56,7 @@ services:
     command: >
       bash -c "
       (test -d env/bin || virtualenv --python=python3 --no-site-packages env) &&
+      (test -f env/bin/pip-sync || env/bin/pip install pip-tools) && 
       source env/bin/activate &&
       ./sync.py &&
       ./manage.py migrate &&
