@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eu
+
+name=${1-}
+
+if [[ ! -n "$name" ]]; then
+  echo "Usage: $0 backend|frontend"
+  exit 0
+fi
+
+docker-compose run --no-deps --rm "$name" bash
