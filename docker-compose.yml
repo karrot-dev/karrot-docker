@@ -87,7 +87,7 @@ services:
     command: >
       sh -c "
       wait-for-it -q -t 0 backend:8000 &&
-      find foodsaving -name '*.py' | entr -r env/bin/python manage.py run_huey
+      find karrot -name '*.py' | entr -r env/bin/python manage.py run_huey
       "
     volumes:
       - ./karrot-backend:/app
