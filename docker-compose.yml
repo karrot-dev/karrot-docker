@@ -51,7 +51,7 @@ services:
     working_dir: /app
 
   backend:
-    image: karrot/python:1.9
+    image: karrot/python:2.0
     restart: unless-stopped
     command: >
       bash -c "
@@ -82,7 +82,7 @@ services:
     working_dir: /app
 
   huey:
-    image: karrot/python:1.9
+    image: karrot/python:2.0
     restart: unless-stopped
     command: >
       sh -c "
