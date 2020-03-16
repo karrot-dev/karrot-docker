@@ -5,6 +5,8 @@ This lets you run everything you need in a docker-compose setup.
 ## Getting started
 
 ```
+If you have not already, [install docker-compose](https://docs.docker.com/compose/install/)
+
 git clone https://github.com/yunity/karrot-docker.git
 cd karrot-docker
 git clone https://github.com/yunity/karrot-frontend.git
