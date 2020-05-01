@@ -50,6 +50,11 @@ Now you can run django commands such as:
 * `./manage.py create_sample_data` to create sample data in your database
 * `./manage.py test` to run the tests
 * `./manage.py test --parallel 4 --failfast --keepdb` run tests with some cool options
+- or in the form of: `docker-compose run --no-deps --rm backend ./manage.py` which might be more convenient, because the shell history inside docker is not saved
+
+_note: karrot-docker uses its own local settings file, located at `./docker/backend/local_settings.py`, which shadows the file you typically create at `./karrot-backend/config/local_settings.py`._ So take care to edit the correct file or change `docker-compose.yml`.
+
+
 
 ## Services
 
