@@ -127,7 +127,7 @@ services:
       - mjml-node_modules:/app/mjml/node_modules
 
   redis:
-    image: redis:3.0.7-alpine
+    image: redis:6.0.8-alpine
     restart: unless-stopped
 
   influxdb:
