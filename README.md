@@ -4,11 +4,11 @@ This lets you run everything you need in a docker-compose setup.
 
 ## Getting started
 
-```
 If you have not already, [install docker-compose](https://docs.docker.com/compose/install/)
 
-git clone https://github.com/yunity/karrot-docker.git
-cd karrot-docker
+```
+git clone https://github.com/yunity/karrot-docker.git karrot
+cd karrot
 git clone https://github.com/yunity/karrot-frontend.git
 git clone https://github.com/yunity/karrot-backend.git
 docker-compose up -d
@@ -21,6 +21,8 @@ You can wait for everything to become ready by watching the `wait` container log
 ```
 docker-compose logs -f wait
 ```
+
+One that is ready go and visit [localhost:8080](http://localhost:8080)! See [#services](#services) for more things you can visit.
 
 If you want to run more commands it's best to start a shell for either the frontend/backend or both.
 
@@ -37,7 +39,7 @@ Enter a shell by running:
 ```
 
 Now you can run commands such as:
-* `yarn lint` lint your files
+* `yarn test` run the tests
 * `yarn add <foo>` add the `foo` dependency
 
 ### Backend
@@ -55,8 +57,6 @@ Now you can run django commands such as:
 - or in the form of: `docker-compose run --no-deps --rm backend ./manage.py` which might be more convenient, because the shell history inside docker is not saved
 
 _note: karrot-docker uses its own local settings file, located at `./docker/backend/local_settings.py`, which shadows the file you typically create at `./karrot-backend/config/local_settings.py`._ So take care to edit the correct file or change `docker-compose.yml`.
-
-
 
 ## Services
 
