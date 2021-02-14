@@ -65,7 +65,7 @@ Once everything is up and running you can access:
 | Name | URL | Description |
 |---|---|---|
 | main site | [localhost:8080](http://localhost:8080) | |
-| swagger backend | [localhost:8000/docs](http://localhost:8000/docs) | view and use the REST API |
+| swagger backend | [localhost:8000/docs/](http://localhost:8000/docs/) | view and use the REST API |
 | maildev | [localhost:1080](http://localhost:1080) | catchs emails sent by app |
 | pgweb | [localhost:5050](http://localhost:5050) | see/view/manage postgres database |
 | grafana | [localhost:4000](http://localhost:4000) admin:admin | see [stats](#stats) section for setup info |
