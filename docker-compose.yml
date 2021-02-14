@@ -51,12 +51,12 @@ services:
     working_dir: /app
 
   backend:
-    image: karrot/python:2.0
+    image: karrot/python:2.5
     restart: unless-stopped
     command: >
       bash -c "
       (test -d env/bin || virtualenv --python=python3 --no-site-packages env) &&
-      (test -f env/bin/pip-sync || env/bin/pip install pip-tools) && 
+      (test -f env/bin/pip-sync || env/bin/pip install pip-tools) &&
       source env/bin/activate &&
       ./sync.py --no-mjml &&
       ./manage.py migrate &&
@@ -70,9 +70,10 @@ services:
       - ./docker/common/.bashrc:/root/.bashrc
       - virtualenv:/app/env
       - pip-cache:/root/.cache/pip/
+    env_file:
+      - ./docker/backend/.env
     environment:
       PYTHONUNBUFFERED: 1
-      REDIS_HOST: redis
       PATH: /app/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       NAME: backend
       TERM: ${TERM:-}
@@ -82,7 +83,7 @@ services:
     working_dir: /app
 
   huey:
-    image: karrot/python:2.0
+    image: karrot/python:2.5
     restart: unless-stopped
     command: >
       sh -c "
@@ -95,8 +96,9 @@ services:
       - virtualenv:/app/env
       - pip-cache:/root/.cache/pip/
       - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
+    env_file:
+      - ./docker/backend/.env
     environment:
-      REDIS_HOST: redis
       LC_ALL: C.UTF-8
       LANG: C.UTF-8
     working_dir: /app

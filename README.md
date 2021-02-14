@@ -33,7 +33,7 @@ We make use of docker volumes to store data, so most useful things should stay a
 Enter a shell by running:
 
 ```
-docker-compose run --no-deps --rm frontend bash
+./scripts/shell frontend
 ```
 
 Now you can run commands such as:
@@ -45,7 +45,7 @@ Now you can run commands such as:
 Enter a shell by running:
 
 ```
-docker-compose run --no-deps --rm backend bash
+./scripts/shell backend
 ```
 
 Now you can run django commands such as:
