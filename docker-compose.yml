@@ -146,7 +146,7 @@ services:
       - ./docker/influxdb/influxdb.toml:/etc/influxdb/influxdb.toml
 
   grafana:
-    image: grafana/grafana:4.6.3
+    image: grafana/grafana:7.4.1
     restart: unless-stopped
     ports:
       - 4000:3000
