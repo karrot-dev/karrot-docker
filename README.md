@@ -7,10 +7,10 @@ This lets you run everything you need in a docker-compose setup.
 If you have not already, [install docker-compose](https://docs.docker.com/compose/install/)
 
 ```
-git clone https://github.com/yunity/karrot-docker.git karrot
+git clone https://github.com/karrot-dev/karrot-docker.git karrot
 cd karrot
-git clone https://github.com/yunity/karrot-frontend.git
-git clone https://github.com/yunity/karrot-backend.git
+git clone https://github.com/karrot-dev/karrot-frontend.git
+git clone https://github.com/karrot-dev/karrot-backend.git
 docker-compose up -d
 ```
 
