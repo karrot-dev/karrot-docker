@@ -3,7 +3,7 @@ services:
 
   wait:
     # just use same image as another container, no extra download
-    image: node:12
+    image: node:16
     command: >
       sh -c "
 
@@ -25,7 +25,7 @@ services:
     - ./docker/wait/wait-for-it:/usr/local/bin/wait-for-it
 
   frontend:
-    image: node:12
+    image: node:16
     restart: unless-stopped
     command: >
       sh -c "
@@ -51,7 +51,7 @@ services:
     working_dir: /app
 
   backend:
-    image: karrot/python:2.5
+    image: karrot/python:2.9
     restart: unless-stopped
     command: >
       bash -c "
@@ -83,7 +83,7 @@ services:
     working_dir: /app
 
   huey:
-    image: karrot/python:2.5
+    image: karrot/python:2.9
     restart: unless-stopped
     command: >
       sh -c "
@@ -118,7 +118,7 @@ services:
       POSTGRES_DB: db
 
   mjml:
-    image: node:10
+    image: node:16
     restart: unless-stopped
     working_dir: /app/mjml
     command: sh -c 'yarn && ./convert --watch'
@@ -129,11 +129,11 @@ services:
       - mjml-node_modules:/app/mjml/node_modules
 
   redis:
-    image: redis:6.0.8-alpine
+    image: redis:6.2.6-alpine
     restart: unless-stopped
 
   influxdb:
-    image: influxdb:1.5.4-alpine
+    image: influxdb:1.7.11-alpine
     restart: unless-stopped
     ports:
       - 8083:8083
@@ -146,7 +146,7 @@ services:
       - ./docker/influxdb/influxdb.toml:/etc/influxdb/influxdb.toml
 
   grafana:
-    image: grafana/grafana:7.4.1
+    image: grafana/grafana:8.2.6
     restart: unless-stopped
     ports:
       - 4000:3000
@@ -154,13 +154,13 @@ services:
       - grafana:/var/lib/grafana
 
   maildev:
-    image: djfarrelly/maildev:1.0.0-rc2
+    image: maildev/maildev:1.1.0
     restart: unless-stopped
     ports:
       - 1080:80
 
   pgweb:
-    image: sosedoff/pgweb:0.11.7
+    image: sosedoff/pgweb:0.11.9
     restart: unless-stopped
     ports:
       - 5050:8081
