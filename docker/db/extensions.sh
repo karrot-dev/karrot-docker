@@ -9,5 +9,6 @@ export PGUSER="$POSTGRES_USER"
 
 echo "Loading extensions into $POSTGRES_DB"
 "${psql[@]}" --dbname="$POSTGRES_DB" <<-'EOSQL'
+    CREATE EXTENSION IF NOT EXISTS citext;
     CREATE EXTENSION IF NOT EXISTS btree_gist;
 EOSQL
