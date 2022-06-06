@@ -9,4 +9,6 @@ if [[ ! -n "$name" ]]; then
   exit 0
 fi
 
+export TERM="xterm-256color"
+
 docker-compose run --no-deps --rm "$name" bash
