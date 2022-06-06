@@ -7,8 +7,10 @@ set -e
 # Perform all actions as $POSTGRES_USER
 export PGUSER="$POSTGRES_USER"
 
-echo "Loading extensions into $POSTGRES_DB"
-"${psql[@]}" --dbname="$POSTGRES_DB" <<-'EOSQL'
+for DB in template1 "$POSTGRES_DB"; do
+  echo "Loading extensions into $DB"
+  "${psql[@]}" --dbname="$DB" <<-'EOSQL'
     CREATE EXTENSION IF NOT EXISTS citext;
     CREATE EXTENSION IF NOT EXISTS btree_gist;
 EOSQL
+done

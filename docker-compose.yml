@@ -111,7 +111,7 @@ services:
     ports:
       - 15432:5432
     volumes:
-      - database-v2:/var/lib/postgresql/data
+      - database-v3:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: db
       POSTGRES_USER: db
@@ -177,6 +177,6 @@ volumes:
   yarn-cache:
   node_modules:
   mjml-node_modules:
-  database-v2:
+  database-v3:
   influxdb:
   grafana:
