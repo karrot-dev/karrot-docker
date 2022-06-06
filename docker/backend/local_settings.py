@@ -8,6 +8,6 @@ TESTING = sys.argv[1:2] == ['test']
 
 if TESTING:
   HUEY = {
-     'always_eager': True,
+     'immediate': True,
   }
   INFLUXDB_DISABLED = True
