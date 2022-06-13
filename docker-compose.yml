@@ -42,6 +42,7 @@ services:
       - 8080
     ports:
       - 8080:8080
+      - 6006:6006
     volumes:
       - ./karrot-frontend:/app
       - ./docker/frontend/.env:/app/.env
