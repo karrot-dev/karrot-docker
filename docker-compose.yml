@@ -179,5 +179,6 @@ volumes:
   node_modules:
   mjml-node_modules:
   database-v3:
+    name: ${DB_VOLUME_NAME:-database-v3}
   influxdb:
   grafana:
