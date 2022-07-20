@@ -34,7 +34,7 @@ services:
       "
     environment:
       HOST: 0.0.0.0
-      BACKEND: http://backend:8000
+      BACKEND: ${BACKEND:-http://backend:8000}
       NAME: frontend
       TERM: ${TERM:-}
       SHELL: /bin/bash
