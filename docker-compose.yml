@@ -30,7 +30,7 @@ services:
     command: >
       sh -c "
       yarn &&
-      yarn dev
+      yarn dev -m pwa
       "
     environment:
       HOST: 0.0.0.0
@@ -81,6 +81,9 @@ services:
       SHELL: /bin/bash
       LC_ALL: C.UTF-8
       LANG: C.UTF-8
+      FCM_SERVER_KEY: ${FCM_SERVER_KEY:-}
+      # so you can override with docker compose .env config...
+      SITE_URL: ${SITE_URL:-http://localhost:8080}
     working_dir: /app
 
   huey:
@@ -102,6 +105,8 @@ services:
     environment:
       LC_ALL: C.UTF-8
       LANG: C.UTF-8
+      FCM_SERVER_KEY: ${FCM_SERVER_KEY:-}
+      SITE_URL: ${SITE_URL:-http://localhost:8080}
     working_dir: /app
     depends_on:
       - backend
